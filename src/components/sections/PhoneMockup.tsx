@@ -1,31 +1,30 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import { motion } from "framer-motion";
-import { RiSmartphoneFill, RiPlaneLine, RiSignalWifiFill } from "react-icons/ri";
+import { RiSmartphoneFill } from "react-icons/ri";
 import secren2 from "@/assets/images/secren2.png";
 import secren3 from "@/assets/images/secren3.png";
 
-function Phone({ delay = 0, children }: { delay?: number; children: React.ReactNode }) {
+function Phone({ delay = 0, small = false, children }: { delay?: number; small?: boolean; children: React.ReactNode }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.7, delay }}
-      className="phone-float relative"
+      className="phone-float relative flex-shrink-0"
       style={{ animationDelay: `${delay}s` }}
     >
       <div
-        className="relative bg-[#0a0a0a] rounded-[40px] border-[5px] border-white/20 shadow-2xl"
-        style={{ width: 220, height: 440 }}
+        className={`relative bg-[#0a0a0a] rounded-[36px] border-[4px] border-white/20 shadow-2xl ${small ? "w-[140px] h-[280px] sm:w-[170px] sm:h-[340px]" : "w-[155px] h-[310px] sm:w-[190px] sm:h-[380px] md:w-[220px] md:h-[440px]"}`}
       >
-        <div className="absolute inset-1.5 rounded-[34px] overflow-hidden">
+        <div className="absolute inset-1.5 rounded-[30px] overflow-hidden">
           {children}
         </div>
-        <div className="absolute right-[-7px] top-20 w-1.5 h-14 bg-white/15 rounded-full" />
-        <div className="absolute left-[-7px] top-16 w-1.5 h-8 bg-white/15 rounded-full" />
-        <div className="absolute left-[-7px] top-28 w-1.5 h-8 bg-white/15 rounded-full" />
+        <div className="absolute right-[-5px] top-16 w-1 h-10 bg-white/15 rounded-full" />
+        <div className="absolute left-[-5px] top-12 w-1 h-7 bg-white/15 rounded-full" />
+        <div className="absolute left-[-5px] top-24 w-1 h-7 bg-white/15 rounded-full" />
       </div>
-      <div className="absolute inset-0 rounded-[40px] bg-primary/15 blur-3xl -z-10 scale-75" />
+      <div className="absolute inset-0 rounded-[36px] bg-primary/15 blur-3xl -z-10 scale-75" />
     </motion.div>
   );
 }
@@ -35,17 +34,16 @@ export function PhoneMockup() {
   const isFr = t.phoneMockup.appstore === "App Store";
 
   return (
-    <section id="download" className="py-24 bg-[#0d0d0d] overflow-hidden">
+    <section id="download" className="py-16 md:py-24 bg-[#0d0d0d] overflow-hidden">
       <div className="container mx-auto px-4 md:px-6">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-10 md:gap-16 items-center">
+
           {/* Phones */}
-          <div className="flex items-end justify-center gap-6 order-2 lg:order-1">
+          <div className="flex items-end justify-center gap-4 sm:gap-6 order-2 lg:order-1">
             <Phone delay={0}>
               <img src={secren2} alt="App screenshot" className="w-full h-full object-cover" />
-
             </Phone>
-
-            <Phone delay={0.15}>
+            <Phone delay={0.15} small>
               <img src={secren3} alt="App screenshot" className="w-full h-full object-cover" />
             </Phone>
           </div>
@@ -56,15 +54,15 @@ export function PhoneMockup() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            className="text-white order-1 lg:order-2"
+            className="text-white order-1 lg:order-2 text-center lg:text-start"
           >
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/20 border border-primary/40 text-primary text-sm font-medium mb-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/20 border border-primary/40 text-primary text-sm font-medium mb-4 md:mb-6">
               <RiSmartphoneFill size={15} /> {isFr ? "Application Mobile" : "تطبيق الهاتف"}
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">{t.phoneMockup.title}</h2>
-            <p className="text-white/60 text-xl mb-10">{t.phoneMockup.subtitle}</p>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4">{t.phoneMockup.title}</h2>
+            <p className="text-white/60 text-lg md:text-xl mb-8 md:mb-10">{t.phoneMockup.subtitle}</p>
 
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
               <a
                 href="https://apps.apple.com/mr/app/master-voyages/id6670750297?l=fr-FR"
                 target="_blank"
@@ -97,6 +95,7 @@ export function PhoneMockup() {
               </a>
             </div>
           </motion.div>
+
         </div>
       </div>
     </section>
